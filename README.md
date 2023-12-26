@@ -7,13 +7,21 @@ pip install git+https://github.com/rionehome/image2text
 
 ## サンプルコード
 ```python
+import cv2
 from image2text import i2t
 
-for text in i2t(): # args: camera_id = 0, cache_dir="cache"
-  print(text)
+i2t = i2t()
 
-#  if (any_condition):
-#    break
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+
+# 1枚だけなら
+text = i2t.image2text(frame)
+
+# リアルタイムでしたい場合
+for text in i2t.realtime_i2t():
+    print(text)
+
 ```
 
 ## 注意点
